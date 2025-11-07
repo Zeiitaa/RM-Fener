@@ -1,12 +1,14 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import api from '@/helpers/api'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+export const useAuthStore = defineStore('auth', {
+  
+  state: () => ({
+    token: localStorage.getItem("token") || null,
+    user: null,
+    profile: JSON.parse(localStorage.getItem("profile")) || null,
+  }),
 
-  return { count, doubleCount, increment }
+ 
 })
