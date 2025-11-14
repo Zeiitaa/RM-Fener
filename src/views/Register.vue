@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/counter';
+import { useAuthStore } from '@/stores/auth';
 import { useToast } from 'vue-toastification';
 import api from '@/helpers/api';
 
@@ -9,66 +9,66 @@ const auth = useAuthStore();
 const router = useRouter();
 const toast = useToast();
 const form = reactive({
-    Nama: '',
-    Username: '',
-    Alamat: '',
-    No_Telp: '',
-    Email: '',
-    Password: '',
-    VPassword: '',
+  Nama: '',
+  Username: '',
+  Alamat: '',
+  No_Telp: '',
+  Email: '',
+  Password: '',
+  VPassword: '',
 })
 
 const errorMsg = ref("")
 
 const urusRegis = async () => {
-    if (form.Password !== form.VPassword){
-        errorMsg.value = "Password tidak sama!"
-        return
+  if (form.Password !== form.VPassword) {
+    errorMsg.value = "Password tidak sama!"
+    return
+  }
+
+  errorMsg.value = ""
+
+  const newUser = {
+    nama: form.Nama,
+    username: form.Username,
+    alamat: form.Alamat,
+    no_telp: form.no_telp,
+    email: form.email,
+    password: form.Password
+  }
+
+  try {
+    const response = await api.post(`/`, newUser)
+
+    if (auth.token) {
+      toast.success("Sukses Tambah User")
+
+      //kembali ke page sebelumnya
+      router.push('/')
+    } else {
+      // customer
+      router.push('/login')
     }
 
-    errorMsg.value = ""
-
-    const newUser = {
-        nama: form.Nama,
-        username: form.Username,
-        alamat: form.Alamat,
-        no_telp: form.no_telp,
-        email: form.email,
-        password: form.Password
+  } catch (error) {
+    if (error.response) {
+      console.error("Error response", error.responnse.data);
+    } else {
+      console.error("Error Registering", error);
     }
+  }
 
-    try{
-        const response = await api.post(`/`, newUser) 
-
-        if(auth.token) {
-            toast.success("Sukses Tambah User")
-            
-            //kembali ke page sebelumnya
-            router.push('/')
-        } else {
-            // customer
-            router.push('/login')
-        }
-
-    } catch (error) {
-        if(error.response) {
-            console.error("Error response", error.responnse.data);
-        } else {
-            console.error("Error Registering", error);
-        }
-    }
-    
 }
 
 const tmplPass = ref(false)
 </script>
 
 <template>
-    <div class="flex flex-col items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
+  <div class="flex flex-col items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
   ">
     <RouterLink to="/">
-            <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110" :src="logo" alt="Perpustakaan Logo" />
-        </RouterLink>
+      <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110" :src="logo" alt="Perpustakaan Logo" />
+    </RouterLink>
 
     <!-- Title -->
     <h2 class="text-2xl text-black text-center font-bold font-poppins mt-4">Welcome to Perpustakaan</h2>
@@ -141,8 +141,7 @@ const tmplPass = ref(false)
 
       <!-- Button -->
       <div class="flex md:col-span-2 mt-3 md:mt-5 justify-center">
-        <button type="submit"
-          class="py-3 text-center w-[50vw] bg-[#232528] hover:bg-[#383a3d] hover:scale-105 hover:cursor-pointer text-white rounded-xl transition-all duration-200
+        <button type="submit" class="py-3 text-center w-[50vw] bg-[#232528] hover:bg-[#383a3d] hover:scale-105 hover:cursor-pointer text-white rounded-xl transition-all duration-200
           md:w-[30vw]
           lg:w-[23vw]
           xl:w-[16vw]

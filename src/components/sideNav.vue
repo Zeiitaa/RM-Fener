@@ -1,12 +1,14 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
-import { useAuthStore } from '@/stores/counter';
+import { useAuthStore } from '@/stores/auth';
+import { useNavStore } from '@/stores/Nav';
 import { defineProps } from 'vue';
 
 const auth = useAuthStore();
-defineProps({
-  showNav: Boolean
-})
+// const props = defineProps({
+//   showNav: Boolean
+// })
+const nav = useNavStore()
 
 const activeLink = (routePath) => {
   const route = useRoute();
@@ -25,57 +27,57 @@ const urusLogout = () => {
 
 <template>
 
-    <aside :class="[
-  'fixed z-50 bg-[#E9F1F7] flex flex-col rounded-r-xl w-[65vw] h-[90%] transition-transform duration-300 ease-in-out',
-  showNav ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+  <aside :class="[
+    'fixed z-50 bg-[#E9F1F7] flex flex-col rounded-r-xl w-[65vw] h-[90%] transition-transform duration-400 ease-in-out',
+    nav.show ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
 
-  'md:static h-[90vh] md:z-auto md:translate-x-0 md:w-[25vw] md:bg-transparent lg:w-[20vw] xl:ml-5 ',
-  
-]">
+    'md:static h-[90vh] md:z-auto md:translate-x-0 md:w-[25vw] md:bg-transparent lg:w-[20vw] xl:ml-5 ',
+
+  ]">
 
 
     <div class="flex flex-col gap-4 space-y-3 grow mt-20" style="border: 2px solid red;">
 
-      <RouterLink to="/" :class="[activeLink('/')
+      <RouterLink to="/"  @click="nav.show = false" :class="[activeLink('/')
         ? 'ml-[10vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Home</span></RouterLink>
 
-      <RouterLink to="/catalog" :class="[activeLink('/catalog')
+      <RouterLink to="/catalog" @click="nav.show = false" :class="[activeLink('/catalog')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Catalog</span></RouterLink>
 
-      <RouterLink v-if="auth.anggota" to="/reservation" :class="[activeLink('/reservation')
-        ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#547792] text-white font-bold md:ml-[2vw] md:w-[15vw]xl:w-[12vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+      <RouterLink  to="/reservations" @click="nav.show = false" :class="[activeLink('/reservations')
+        ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw]xl:w-[12vw]'
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Reservation</span></RouterLink>
 
       <RouterLink v-if="auth.anggota" to="/contact" :class="[activeLink('/contact')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#547792] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Contact Us!</span></RouterLink>
 
       <RouterLink v-if="auth.isPetugas" to="/users" :class="[activeLink('/users')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Users</span></RouterLink>
 
       <RouterLink v-if="auth.isPetugas" to="/approve" :class="[activeLink('/approve')
         ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[18vw] lg:w-[14vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[45vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[18vw] lg:w-[14vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[45vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[18vw] lg:w-[14vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Peminjaman</span></RouterLink>
 
       <RouterLink v-if="auth.isPetugas" to="/kembali" :class="[activeLink('/kembali')
         ? 'ml-[5vw] w-[48vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[20vw] lg:w-[16vw] xl:w-[12vw]'
-        : 'ml-[2vw] w-[48vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[20vw] lg:w-[15vw] xl:w-[12vw]',
+        : 'ml-[2vw] w-[48vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[20vw] lg:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Pengembalian</span></RouterLink>
     </div>
 
     <!-- LOGOUT di paling bawah -->
-    <RouterLink  to="/login" @click.prevent="urusLogout" :class="[activeLink('/login')
+    <RouterLink to="/login" @click.prevent="urusLogout" :class="[activeLink('/login')
       ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text- font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
-      : 'ml-[2vw] w-[35vw] hover:bg-gray-600 hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+      : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
       'px-4', 'py-3', 'rounded-md', 'font-poppins', 'mt-auto', 'mb-15']">
       Login
     </RouterLink>
@@ -83,7 +85,7 @@ const urusLogout = () => {
 
   </aside>
 
-    <!-- <div class="md:ml-auto ">
+  <!-- <div class="md:ml-auto ">
         <div :class="[activeLink('/login')
             ? 'hidden'
             : 'flex space-x-5'
