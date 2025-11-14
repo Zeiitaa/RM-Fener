@@ -4,7 +4,7 @@ import { onMounted, reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import router from '@/router';
 import { jwtDecode } from 'jwt-decode';
-import { useAuthStore } from '@/stores/counter';
+import { useAuthStore } from '@/stores/auth';
 
 const form = reactive({
     Username: '',
@@ -46,7 +46,8 @@ const tmplPass = ref(false)
 
             <div class="relative w-[95%]">
                 <!-- input -->
-                <input v-model="form.Password" :type="tmplPass ? 'text' : 'password'" placeholder="Password" class="w-full bg-[#E9F1F7] border border-[#7895B2] rounded p-2 pr-10 font-poppins hover:scale-102 transition-all duration-100 focus:outline-none" />
+                <input v-model="form.Password" :type="tmplPass ? 'text' : 'password'" placeholder="Password"
+                    class="w-full bg-[#E9F1F7] border border-[#7895B2] rounded p-2 pr-10 font-poppins hover:scale-102 transition-all duration-100 focus:outline-none" />
 
                 <!-- icon -->
                 <i :class="tmplPass ? 'pi pi-eye-slash' : 'pi pi-eye'"
