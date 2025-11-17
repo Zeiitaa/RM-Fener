@@ -4,6 +4,7 @@ import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { useToast } from 'vue-toastification';
 import api from '@/helpers/api';
+import logo from '@/assets/img/logo.png'
 
 const auth = useAuthStore();
 const router = useRouter();
@@ -141,7 +142,7 @@ const tmplPass = ref(false)
 
       <!-- Button -->
       <div class="flex md:col-span-2 mt-3 md:mt-5 justify-center">
-        <button type="submit" class="py-3 text-center w-[50vw] bg-[#232528] hover:bg-[#383a3d] hover:scale-105 hover:cursor-pointer text-white rounded-xl transition-all duration-200
+        <button type="submit" class="py-3 text-center w-[50vw] font-bold bg-[#232528] hover:bg-[#383a3d] hover:scale-105 hover:cursor-pointer text-white rounded-xl transition-all duration-200
           md:w-[30vw]
           lg:w-[23vw]
           xl:w-[16vw]

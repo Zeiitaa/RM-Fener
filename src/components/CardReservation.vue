@@ -12,13 +12,15 @@ defineProps({
 </script>
 
 <template>
-     <div class="bg-white rounded-2xl overflow-hidden shadow-md w-[80vw]">
+  <div class="bg-white rounded-2xl overflow-hidden shadow-md w-[80vw]
+    sm:w-[35vw]
+    md:w-[30vw]
+    lg:w-[22.5vw]
+    xl:w-[20vw]
+    2xl:w-[15vw]
+    ">
     <!-- IMAGE -->
-    <img
-      :src="image"
-      alt=""
-      class="w-full h-44 object-cover"
-    />
+    <img :src="image" alt="" class="w-full h-44 object-cover" />
 
     <!-- CONTENT -->
     <div class="p-4 space-y-2">
@@ -27,14 +29,12 @@ defineProps({
 
       <div class="flex items-center justify-between mt-3">
         <div class="text-xs font-semibold">
-          <span class="text-red-500">{{ priceSpecial }} /Hour</span> 
+          <span class="text-red-500">{{ priceSpecial }} /Hour</span>
           <span class="text-gray-700">{{ priceNormal }} /Hour</span>
         </div>
 
-        <button
-          class="w-8 h-8 flex items-center justify-center border border-black rounded-full"
-        >
-          <PlusIcon class="size-4"/>
+        <button class="w-8 h-8 flex items-center justify-center border border-black rounded-full">
+          <PlusIcon class="size-4" />
         </button>
       </div>
     </div>

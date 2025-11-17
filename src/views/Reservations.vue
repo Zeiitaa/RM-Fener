@@ -5,16 +5,14 @@ import Reservation from '@/components/Reservation.vue';
 </script>
 
 <template>
-    <div class="flex justify-center">
-        <sideNav class="hidden md:flex"/>
+    <div class="flex flex-col md:flex-row gap-2 justify-center sm:justify-start pt-25">
+        <div class=" justify-center sm:justify-start">
+            <sideNav class="hidden md:flex" />
+        </div>
+
+        <div class=" flex flex-col items-center mt-5">
+            <Reservation />
+        </div>
+
     </div>
-
-    <div class="flex justify-center mt-3">
-        <span class="font-poppins text-2xl font-semibold "> 
-            Today's Available
-        </span>
-    </div>
-
-    <Reservation />
-
 </template>
