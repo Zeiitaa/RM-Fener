@@ -26,36 +26,44 @@ const urusLogout = () => {
 <template>
 
   <aside :class="[
-    'fixed z-50 bg-[#E9F1F7]/95 flex flex-col rounded-r-xl w-[65vw] h-[90%] transition-transform duration-400 ease-in-out pt-25 sm:w-[37vw] lg:w-[25vw] xl:w-[20vw]',
-    nav.show ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
-
-    'pt- md:static h-[90vh] md:z-auto md:translate-x-0 md:w-[25vw] md:bg-transparent lg:w-[20vw] xl:ml-5 ',
+    'fixed md:static top-0 left-0 h-screen bg-[#E9F1F7]/95 md:bg-transparent rounded-r-xl z-50 flex flex-col pt-24 transition-transform duration-300',
+    'w-[70vw] sm:w-[50vw] md:w-[22vw] lg:w-[18vw]',
+    nav.show ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
 
   ]">
 
 
-    <div class="flex flex-col gap-4 space-y-3 grow fixed z-50" >
+    <div class="flex flex-col gap-4 space-y-3 grow ">
 
-      <RouterLink to="/"  :class="[activeLink('/')
+      <!-- ini visible ke semua role termasuk yang belum login -->
+      <RouterLink to="/" @click="nav.show = false" :class="[activeLink('/')
         ? 'ml-[10vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold sm:ml-[3vw] sm:w-[25vw] md:w-[15vw] md:ml-[5vw] xl:w-[12vw] xl:ml-[4vw] '
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Home</span></RouterLink>
 
-      <RouterLink to="/catalog" @click="nav.show = false" :class="[activeLink('/catalog')
+      <RouterLink to="/catalogs" @click="nav.show = false" :class="[activeLink('/catalogs')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] sm:w-[25vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Catalog</span></RouterLink>
 
-      <RouterLink  to="/reservations" :class="[activeLink('/reservations')
+      <RouterLink to="/reservations" @click="nav.show = false" :class="[activeLink('/reservations')
         ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[3vw] sm:w-[25vw] md:w-[20vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Reservation</span></RouterLink>
 
-      <RouterLink v-if="auth.anggota" to="/contact" :class="[activeLink('/contact')
-        ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#547792] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
+      <RouterLink to="/about" @click="nav.show = false" :class="[activeLink('/about')
+        ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[3vw] sm:w-[25vw] md:w-[20vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
-        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Contact Us!</span></RouterLink>
+        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>About</span></RouterLink>
 
+
+      <!-- ini khusus anggota yang sudah login -->
+      <RouterLink v-if="auth.isAnggota" to="/myReservation" :class="[activeLink('/myReservation')
+        ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
+        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>My Reservation</span></RouterLink>
+
+      <!-- ini khusus petugas -->
       <RouterLink v-if="auth.isPetugas" to="/users" :class="[activeLink('/users')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
@@ -73,16 +81,23 @@ const urusLogout = () => {
     </div>
 
     <!-- LOGOUT di paling bawah -->
-    <RouterLink to="/login" @click.prevent="urusLogout" :class="[activeLink('/login')
+    <RouterLink v-if="!auth.token" to="/login" @click.prevent="urusLogout" :class="[activeLink('/login')
       ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text- font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
       : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
       'px-4', 'py-3', 'rounded-md', 'font-poppins', 'mt-auto', 'mb-15']">
       Login
     </RouterLink>
-
+    <RouterLink v-else to="/login" @click.prevent="urusLogout" :class="[activeLink('/login')
+      ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text- font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw]'
+      : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
+      'px-4', 'py-3', 'rounded-md', 'font-poppins', 'mt-auto', 'mb-15']">
+      Logout
+    </RouterLink>
 
   </aside>
 
+
+  
   <!-- <div class="md:ml-auto ">
         <div :class="[activeLink('/login')
             ? 'hidden'

@@ -32,14 +32,17 @@ const urusRegis = async () => {
   const newUser = {
     nama: form.Nama,
     username: form.Username,
-    alamat: form.Alamat,
-    no_telp: form.no_telp,
-    email: form.email,
+    no_telp: form.No_Telp,
+    email: form.Email,
     password: form.Password
   }
 
+  console.log(newUser);
+
   try {
-    const response = await api.post(`/`, newUser)
+    const response = await api.post(`/api/v1/auth/register`, newUser)
+
+    
 
     if (auth.token) {
       toast.success("Sukses Tambah User")
@@ -108,12 +111,7 @@ const tmplPass = ref(false)
           class="w-full bg- p-2 border border-gray-500 rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </div>
 
-      <!-- Alamat (full width) -->
-      <div class="md:col-span-2">
-        <label class="block text- font-poppins mb-1">Alamat</label>
-        <input v-model="form.Alamat" type="text" placeholder="Alamat"
-          class="w-full bg- p-2 border border-gray-500 rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-blue-400" />
-      </div>
+      
 
       <!-- Password -->
       <div>
@@ -128,7 +126,7 @@ const tmplPass = ref(false)
 
       <!-- Verify Password -->
       <div>
-        <label class="block text-white font-poppins mb-1">Konfirmasi Password</label>
+        <label class="block text-black font-poppins mb-1">Konfirmasi Password</label>
         <input v-model="form.VPassword" type="password" placeholder="Konfirmasi Password"
           class="w-full bg- p-2 border border-gray-500 rounded-md font-poppins focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </div>

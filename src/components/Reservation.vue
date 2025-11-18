@@ -21,6 +21,7 @@ import vip from '@/assets/img/vip.jpg'
         sm:flex-row sm:flex-wrap sm:justify-center sm:gap-8 sm:w-screen
         md:w-full md:gap-x-5
         ">
+        
             <Card :image="family" 
             title="Family 1" 
             people="4" 

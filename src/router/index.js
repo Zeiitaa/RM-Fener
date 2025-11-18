@@ -7,6 +7,9 @@ import Register from '@/views/Register.vue'
 import HomeView from '@/views/HomeView.vue'
 import Reservations from '@/views/Reservations.vue'
 import NotFound from '@/views/NotFound.vue'
+import MyReservation from '@/views/MyReservation.vue'
+import about from '@/views/About.vue'
+import Catalogs from '@/views/Catalogs.vue'
 
 const router = createRouter({
   history: createWebHistory(
@@ -36,11 +39,28 @@ const router = createRouter({
     },
 
     {
+      path: '/catalogs',
+      name: 'catalogs',
+      component: Catalogs
+    },
+
+    {
       path: '/reservations',
       name: 'reservations',
       component: Reservations
     },
 
+    {
+      path:'/myReservation',
+      name: 'myReservation',
+      component: MyReservation
+    },
+
+    {
+      path:'/about',
+      name: 'about',
+      component: about
+    },
 
     {
       path: '/:catchAll(.*)',

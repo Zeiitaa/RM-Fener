@@ -4,8 +4,9 @@ import Bakso from '@/assets/img/bakso.jpg';
 import NasPad from '@/assets/img/NASPAD.jpg'
 import ayamPop from '@/assets/img/ayamPop.jpg'
 import { ref } from 'vue';
-
-const nama = ref('')
+import { useAuthStore } from '@/stores/auth';
+import Footer from '@/components/footer.vue';
+const auth = useAuthStore()
 
 </script>
 
@@ -15,8 +16,11 @@ const nama = ref('')
     <div class="flex flex-col">
 
         <div class="flex flex-col items-center md:w-[60%] lg:w-[65%] xl:w-[75%]">
-            <span class="font-poppins text-2xl font-semibold">
-                Hello{{ nama }} ! <br /> <br />
+            <span v-if="!auth.token" class="font-poppins text-2xl font-semibold">
+                 Hello There! <br /> <br />
+            </span>
+            <span v-else class="font-poppins text-2xl font-semibold">
+                 Hello {{ auth.profile.username }}! <br /> <br />
             </span>
             <span class="font-poppins text-2xl font-semibold">
                 Today's Menu :
@@ -83,4 +87,7 @@ const nama = ref('')
     </div>
 
     </div>
+
+    <Footer></Footer>
+
 </template>
