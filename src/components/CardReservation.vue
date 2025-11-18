@@ -9,10 +9,15 @@ defineProps({
   priceSpecial: String,
   priceNormal: String,
 })
+
+//Endpoint API request reservation
+
+
+
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl overflow-hidden shadow-md w-[80vw]
+  <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:scale-105 hover:cursor-pointer transition-all duration-200 w-[80vw]
     sm:w-[35vw]
     md:w-[30vw]
     lg:w-[22.5vw]
@@ -33,7 +38,7 @@ defineProps({
           <span class="text-gray-700">{{ priceNormal }} /Hour</span>
         </div>
 
-        <button class="w-8 h-8 flex items-center justify-center border border-black rounded-full">
+        <button class="w-8 h-8 flex hover:scale-105 hover:cursor-pointer transition-all duration-200 items-center justify-center border border-black rounded-full">
           <PlusIcon class="size-4" />
         </button>
       </div>

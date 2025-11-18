@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('auth', {
         data.set('username', usn)
         data.set('password', pw)
         data.set('scope', "")
-        const Fauth = await api.post(`/auth/login`,
+        const Fauth = await api.post(`/api/v1/auth/login`,
           // ini berdasarkan form fastAPI
           data,
 
@@ -46,14 +46,15 @@ export const useAuthStore = defineStore('auth', {
 
     async fetchProfile() {
       try {
-        const Fprofile = await api.get(`/user/profile`, {
+        const Uprofile = await api.get(`/user/profile`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           }
         });
 
-        this.profile = Fprofile.data
-        localStorage.setItem("profile", JSON.stringify(Fprofile.data));
+        this.profile = Uprofile.data
+        localStorage.setItem("profile", JSON.stringify(Uprofile.data));
+        console.log(this.profile);
       } catch (error) {
         console.error("Gagal ambil Profile", error);
       }
@@ -68,5 +69,4 @@ export const useAuthStore = defineStore('auth', {
       state.profile?.role === 'anggota'
 
   }
-
 })

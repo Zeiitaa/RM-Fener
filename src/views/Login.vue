@@ -12,6 +12,47 @@ const form = reactive({
     Password: '',
 })
 
+const auth = useAuthStore()
+
+//onmounted login delete token (just in case)
+onMounted(() => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("profile")
+    localStorage.removeItem("decodetoken")
+})
+
+async function urusLogin() {
+    try {
+        await auth.fetchAuth(form.Username, form.Password)
+        console.log("Token > ", auth.token);
+
+        const token = auth.token
+
+        if(token){
+            try {
+                // Decode TOKEN
+                const decodeToken = jwtDecode(token)
+                // set di local
+                localStorage.setItem("decodetoken", JSON.stringify(decodeToken))
+
+                //ambil profile
+                const profile = await auth.fetchProfile()
+
+                router.push("/")
+                
+            } catch (error) {
+                console.error(object);
+                return
+            }
+        }
+
+
+    } catch(error) {
+        console.error(error);
+        return
+    }
+}
+
 const tmplPass = ref(false)
 </script>
 
@@ -29,7 +70,7 @@ const tmplPass = ref(false)
         <RouterLink to="/">
             <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110 " :src="logo" alt="Perpustakaan Logo" />
         </RouterLink>
-        <h2 class="text-xl text-white text-center font-bold font-poppins mb-2">Welcome to Perpustakaan</h2>
+        <h2 class="text-xl text-white text-center font-bold font-poppins mb-2">Welcome to RM Padang</h2>
 
         <span class="text-sm text-white font-poppins">Belum punya akun? <RouterLink to="/register"
                 class="text-[#9dd1f1] font-poppins">Sign
