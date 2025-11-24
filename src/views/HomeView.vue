@@ -16,10 +16,10 @@ const auth = useAuthStore()
 
     <div class="flex flex-col justify-center mt-30">
         <!-- text hero -->
-        <span class="font-bold text-2xl sm:text-4xl text-[#232528] text-center">Premium Dining <br> Zero Waiting</span>
+        <span class="font-bold text-2xl sm:text-4xl  text-[#232528] text-center">Premium Dining <br> Zero Waiting</span>
     </div>
 
-    <div class="flex flex-col items-center mt-10">
+    <div class="flex flex-col items-center mt-5">
 
         <!-- gambar -->
 

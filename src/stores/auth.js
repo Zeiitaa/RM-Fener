@@ -63,10 +63,10 @@ export const useAuthStore = defineStore('auth', {
   },
   getters: {
     isPetugas: (state) =>
-      state.profile?.role === 'petugas',
+      state.profile?.role === 'admin',
 
-    isAnggot: (state) =>
-      state.profile?.role === 'anggota'
+    isAnggota: (state) =>
+      state.profile?.role === 'customer'
 
   }
 })

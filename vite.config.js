@@ -22,7 +22,7 @@ export default defineConfig({
     port: 5000,
     proxy: {
       '/api': {
-        target: "https://nonfaulty-harrowingly-candelaria.ngrok-free.dev",
+        target: "https://3ecee8318cb6.ngrok-free.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

@@ -68,7 +68,7 @@ const tmplPass = ref(false)
 </script>
 
 <template>
-  <div class="flex flex-col items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
+  <div class="flex flex-col bg-white items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
   ">
     <RouterLink to="/">
       <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110" :src="logo" alt="Perpustakaan Logo" />

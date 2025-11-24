@@ -1,72 +1,80 @@
 <script setup>
 import Card from '@/components/CardReservation.vue';
-import family from '@/assets/img/family.jpg'
+
 import date from '@/assets/img/date.jpg'
 import vip from '@/assets/img/vip.jpg'
+import { onMounted, reactive } from 'vue';
+import api from '@/helpers/api';
+import { useAuthStore } from '@/stores/auth';
+import PulseLoader  from 'vue-spinner/src/PulseLoader.vue'
+
+const auth = useAuthStore()
+
+const state = reactive({
+    tables: [],
+    tableAvailable: [],
+    isLoading: true
+})
+
+//ambil data meja
+onMounted(async () => {
+    // meja available
+    try {
+        const response = await api.get(`/meja/`)
+        console.log(response.data);
+        state.tableAvailable = response.data
+        console.log(state.tableAvailable);
+    } catch (error) {
+        console.error(error);
+    }
+
+    try {
+        const res = await api.get(`/meja/`)
+        console.log(res.data);
+        state.tables = res.data
+        console.log(state.tables);
+    } catch (error) {
+        console.error(error);
+    } finally {
+        state.isLoading = false
+    }
+})
+
+
 </script>
 
 <template>
 
-<div class="flex flex-col">
+    <!-- Available -->
+    <div class="flex flex-col justify-center items-center md:w-[60%] lg:w-[65%] xl:w-[75%]">
+        <span class="font-poppins text-2xl font-semibold">
 
-    <div class="flex flex-col items-center md:w-[60%] lg:w-[65%] xl:w-[75%]">
-            <span class="font-poppins text-2xl font-semibold">
-                Today's Available :
-            </span>
+        </span>
     </div>
 
-    <div class="flex justify-center">
+    <div class="flex flex-col">
 
-        <div class="flex flex-col items-center gap-6 mt-7 mb-10 w-[80vw]
+        <div class="flex justify-center">
+
+            <div class="flex flex-col items-center gap-6 mt-7 mb-10 w-[80vw]
         sm:flex-row sm:flex-wrap sm:justify-center sm:gap-8 sm:w-screen
         md:w-full md:gap-x-5
+        lg:w-[80vw]
+        xl:w-[80vw]
+        2xl:w-[70vw]
         ">
-        
-            <Card :image="family" 
-            title="Family 1" 
-            people="4" 
-            priceSpecial="$400"
-            priceNormal="$500" 
-            >
-            </Card>
-            <Card :image="family" 
-            title="Family 2" 
-            people="3" 
-            priceSpecial="$325.00"
-            priceNormal="$348" 
-            >
-            </Card>
-            <Card :image="date" 
-            title="Date 1" 
-            people="2" 
-            priceSpecial="$325.00"
-            priceNormal="$348" 
-            >
-            </Card>
-            <Card :image="date" 
-            title="Date 2" 
-            people="2" 
-            priceSpecial="$325.00"
-            priceNormal="$348" 
-            >
-            </Card>
-            <Card :image="vip" 
-            title="vip 1" 
-            people="2" 
-            priceSpecial="$325.00"
-            priceNormal="$348" 
-            >
-            </Card>
-            <Card :image="vip" 
-            title="vip" 
-            people="2" 
-            priceSpecial="$325.00"
-            priceNormal="$348" 
-            >
-            </Card>
+
+                <div v-if="state.isLoading" class="flex justify-center items-center h-40">
+                    <PulseLoader color="black"/>
+                </div>
+
+                <!-- Available -->
+                <Card v-else v-for="table in state.tableAvailable" :key="table.meja_id" :meja="table"></Card>
+                
+            </div>
+
         </div>
 
     </div>
 
-</div>
 </template>
