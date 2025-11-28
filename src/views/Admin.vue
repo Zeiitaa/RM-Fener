@@ -14,6 +14,7 @@ const router = useRouter()
 
 const checkRole = () => {
     if (!auth.isPetugas) {
+        alert('Anda Bukan Petugas')
         router.push("/")
     }
 }
@@ -46,6 +47,8 @@ const state = reactive({
     loadPayment: true,
     loadfeedback: true,
 })
+
+
 
 const currentView = ref("request")
 const showReq = () => { currentView.value = "request" }
@@ -219,6 +222,13 @@ const getFeedback = async () => {
 
 }
 
+const refresh = async () => {
+    getRequest()
+    getReservation()
+    getPayment()
+    getFeedback()
+}
+
 // Navigasi halaman
 const goPrev = () => {
     if (state.page > 1) {
@@ -261,7 +271,7 @@ onMounted(() => {
                 <button @click="showPay"
                     :class="currentView === 'payment' ? 'bg-[#232528] text-white' : 'bg-[#232528]/70 text-white'"
                     class="w-[40%] max-w-[200px] px-2 py-2 rounded-lg text-sm font-semibold transition hover:scale-105 hover:cursor-pointer">
-                    Reservation Payment
+                    Reservation Invoice
                 </button>
                 <button @click="showfeed"
                     :class="currentView === 'feedback' ? 'bg-[#232528] text-white' : 'bg-[#232528]/70 text-white'"
@@ -295,7 +305,7 @@ onMounted(() => {
                     </div>
 
                     <RequestReservation v-for="reserve in state.request" :key="reserve.reservation_id"
-                        :reservation="reserve" />
+                        :reservation="reserve" @refresh-data="refresh"/>
                 </div>
                 <!-- Pagination -->
                 <div v-if="state.request.length" class="flex justify-center mt-4 space-x-2 mb-10">
@@ -332,7 +342,7 @@ onMounted(() => {
                 <div v-else class="flex flex-col gap-7 sm:flex-row sm:flex-wrap justify-center">
                     <!-- Reservation content -->
                     <AcceptedReservation v-for="resAcc in state.reservation" :key="resAcc.reservation_id"
-                        :reservation="resAcc" />
+                        :reservation="resAcc" @refresh-data="refresh" />
                 </div>
 
                 <!-- Pagination -->
@@ -355,7 +365,7 @@ onMounted(() => {
 
                 <div class="flex flex-col justify-center items-center mb-5">
                     <span class="font-poppins text-2xl font-semibold">
-                        Reservation Payment
+                        Reservation Invoice
                     </span>
                 </div>
 
@@ -366,7 +376,7 @@ onMounted(() => {
                 </div>
                 <div v-else class="flex flex-col gap-7 sm:flex-row ">
                     <!-- Payment content -->
-                    <Payment v-for="pay in state.payment" :key="pay.payment_id" :payment="pay" />
+                    <Payment v-for="pay in state.payment" :key="pay.payment_id" :payment="pay" @refresh-data="refresh"/>
                 </div>
             </div>
 
@@ -377,7 +387,7 @@ onMounted(() => {
                 </div>
                 <div v-else>
                     <!-- Feedback content -->
-                    <Feedback v-for="feed in state.feedback" :key="feed.feedback_id" :feedback="feed" />
+                    <Feedback v-for="feed in state.feedback" :key="feed.feedback_id" :feedback="feed" @refresh-data="refresh" />
                 </div>
             </div>
 

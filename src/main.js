@@ -1,5 +1,6 @@
 import '@/assets/main.css'
 import 'primeicons/primeicons.css'
+import 'vue-toastification/dist/index.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import Toast from 'vue-toastification'

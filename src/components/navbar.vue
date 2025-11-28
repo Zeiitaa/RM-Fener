@@ -39,6 +39,9 @@ onMounted(() => {
 })
 
 const urusLogout = () => {
+
+    auth.logout()
+
     localStorage.removeItem("token")
     localStorage.removeItem("decodetoken")
     localStorage.removeItem("profile")
@@ -138,7 +141,7 @@ const urusLogout = () => {
                     <div v-else class="hidden lg:flex items-center space-x-3 text-white relative group cursor-pointer">
 
                         <div class="w-9 h-9 bg-white rounded-full"></div>
-                        <span class="font-poppins font-semibold">Hi, {{ auth.profile.username }}</span>
+                        <span v-if="auth.profile" class="font-poppins font-semibold">Hi, {{ auth.profile.username }}</span>
 
                         <!-- DROPDOWN -->
                         <div class="absolute top-full right-0 mt-2 w-40 bg-[#232528] text-white rounded-lg shadow-lg 

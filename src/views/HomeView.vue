@@ -7,8 +7,10 @@ import naspad from '@/assets/img/NASPAD.jpg'
 import nasipadang from '@/assets/img/NasiPadang.jpg'
 import { useAuthStore } from '@/stores/auth';
 import Foooter from '@/components/footer.vue';
+import { onMounted } from 'vue';
 
 const auth = useAuthStore()
+
 
 </script>
 

@@ -58,7 +58,7 @@ const urusLogout = () => {
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>My Reservation</span></RouterLink>
 
       <!-- ini khusus petugas -->
-      <RouterLink to="/Admin" :class="[activeLink('/Admin')
+      <RouterLink v-if="auth.isPetugas" to="/Admin" :class="[activeLink('/Admin')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Admin Page</span></RouterLink>
