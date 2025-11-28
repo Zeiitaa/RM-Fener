@@ -53,7 +53,7 @@ import { RouterLink } from 'vue-router';
   </div>
 
   <div class="border-t border-gray-700 mt-10 pt-6 text-center text-xs text-gray-500">
-    © 2025 YourRestaurant. All rights reserved.
+    © 2025 DRG. All rights reserved.
   </div>
 </footer>
 </template>

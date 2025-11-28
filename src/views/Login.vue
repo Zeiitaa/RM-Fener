@@ -15,11 +15,19 @@ const form = reactive({
 const auth = useAuthStore()
 
 //onmounted login delete token (just in case)
-onMounted(() => {
-    localStorage.removeItem("token")
-    localStorage.removeItem("profile")
-    localStorage.removeItem("decodetoken")
-})
+// onMounted(() => {
+//     localStorage.removeItem("token")
+//     localStorage.removeItem("profile")
+//     localStorage.removeItem("decodetoken")
+//     router.push("/login")
+// })
+
+// const remove = () => {
+//     localStorage.removeItem("token")
+//     localStorage.removeItem("profile")
+//     localStorage.removeItem("decodetoken")
+//     router.push("/")
+// }
 
 async function urusLogin() {
     try {
@@ -68,7 +76,7 @@ const tmplPass = ref(false)
 
 
         <RouterLink to="/">
-            <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110 " :src="logo" alt="Perpustakaan Logo" />
+            <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110 " :src="logo" alt="RM Padang Logo" />
         </RouterLink>
         <h2 class="text-xl text-white text-center font-bold font-poppins mb-2">Welcome to RM Padang</h2>
 

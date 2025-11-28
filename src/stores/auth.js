@@ -1,21 +1,25 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import {
+  ref,
+  computed
+} from 'vue'
+import {
+  defineStore
+} from 'pinia'
 import api from '@/helpers/api'
 
 export const useAuthStore = defineStore('auth', {
-  
+
   state: () => ({
     token: localStorage.getItem("token") || null,
-    user: null,
     profile: JSON.parse(localStorage.getItem("profile")) || null,
   }),
 
- actions: {
+  actions: {
 
     async fetchAuth(usn, pw) {
       try {
         const data = new FormData()
-        data.set('grant_type', "password",)
+        data.set('grant_type', "password", )
         data.set('username', usn)
         data.set('password', pw)
         data.set('scope', "")
@@ -30,15 +34,17 @@ export const useAuthStore = defineStore('auth', {
             }
           })
 
+
+        //set auth.token yang ada di auth.js menjadi apa yang berdasarkan response data akses token
+        this.token = Fauth.data.access_token
+
         //set token di local storage
         localStorage.setItem("token", Fauth.data.access_token)
 
-        //set auth.token yang ada di auth.js menjadi apa yang berdasarkan response data akses token
-        this.token = localStorage.getItem("token")
-
       } catch (error) {
+        this.token = null
+        localStorage.removeItem("token")
         alert("Username atau Password salah")
-
         console.error("Gagal Login", error);
       }
     },
@@ -58,15 +64,25 @@ export const useAuthStore = defineStore('auth', {
       } catch (error) {
         console.error("Gagal ambil Profile", error);
       }
+    },
+
+
+    async logout() {
+      this.token = null
+      this.profile = null
+      localStorage.removeItem('token')
+      localStorage.removeItem('profile')
     }
 
   },
+
+
   getters: {
     isPetugas: (state) =>
-      state.profile?.role === 'petugas',
+      state.profile?.role === 'admin',
 
-    isAnggot: (state) =>
-      state.profile?.role === 'anggota'
+    isAnggota: (state) =>
+      state.profile?.role === 'customer'
 
   }
 })

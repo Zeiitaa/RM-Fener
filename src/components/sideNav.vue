@@ -51,12 +51,6 @@ const urusLogout = () => {
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Reservation</span></RouterLink>
 
-      <RouterLink to="/about" @click="nav.show = false" :class="[activeLink('/about')
-        ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[3vw] sm:w-[25vw] md:w-[20vw] xl:w-[12vw] xl:ml-[4vw]'
-        : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
-        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>About</span></RouterLink>
-
-
       <!-- ini khusus anggota yang sudah login -->
       <RouterLink v-if="auth.isAnggota" to="/myReservation" :class="[activeLink('/myReservation')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
@@ -64,20 +58,10 @@ const urusLogout = () => {
         'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>My Reservation</span></RouterLink>
 
       <!-- ini khusus petugas -->
-      <RouterLink v-if="auth.isPetugas" to="/users" :class="[activeLink('/users')
+      <RouterLink v-if="auth.isPetugas" to="/Admin" :class="[activeLink('/Admin')
         ? 'ml-[5vw] w-[35vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[15vw] xl:w-[12vw] xl:ml-[4vw]'
         : 'ml-[2vw] w-[35vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[15vw] xl:w-[12vw]',
-        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Users</span></RouterLink>
-
-      <RouterLink v-if="auth.isPetugas" to="/approve" :class="[activeLink('/approve')
-        ? 'ml-[5vw] w-[45vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[18vw] lg:w-[14vw] xl:w-[12vw] xl:ml-[4vw]'
-        : 'ml-[2vw] w-[45vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[18vw] lg:w-[14vw] xl:w-[12vw]',
-        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Peminjaman</span></RouterLink>
-
-      <RouterLink v-if="auth.isPetugas" to="/kembali" :class="[activeLink('/kembali')
-        ? 'ml-[5vw] w-[48vw] hover:scale-115 transition-all duration-200 bg-[#232528] text-white font-bold md:ml-[2vw] md:w-[20vw] lg:w-[16vw] xl:w-[12vw] xl:ml-[4vw]'
-        : 'ml-[2vw] w-[48vw] hover:bg-[#232528] hover:text-white hover:scale-115 transition-all duration-200 text-black font-bold md:w-[20vw] lg:w-[15vw] xl:w-[12vw]',
-        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Pengembalian</span></RouterLink>
+        'px-4', 'py-3', 'rounded-md', 'font-poppins']"><span>Admin Page</span></RouterLink>
     </div>
 
     <!-- LOGOUT di paling bawah -->

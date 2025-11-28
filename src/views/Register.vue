@@ -68,14 +68,14 @@ const tmplPass = ref(false)
 </script>
 
 <template>
-  <div class="flex flex-col items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
+  <div class="flex flex-col bg-white items-center max-w-3xl p-8 rounded-2xl mx-auto md:mt-[15vh]
   ">
     <RouterLink to="/">
-      <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110" :src="logo" alt="Perpustakaan Logo" />
+      <img class=" mx-auto mt-[-0.5vh] h-25 w-auto hover:scale-110" :src="logo" alt="RM Padang Logo" />
     </RouterLink>
 
     <!-- Title -->
-    <h2 class="text-2xl text-black text-center font-bold font-poppins mt-4">Welcome to Perpustakaan</h2>
+    <h2 class="text-2xl text-black text-center font-bold font-poppins mt-4">Welcome to RM Padang</h2>
     <span class="text-sm text-black font-poppins">
       Sudah punya akun?
       <RouterLink to="/login" class="text-black font-bold hover:underline">Login</RouterLink>

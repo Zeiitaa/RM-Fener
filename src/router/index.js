@@ -10,6 +10,7 @@ import NotFound from '@/views/NotFound.vue'
 import MyReservation from '@/views/MyReservation.vue'
 import about from '@/views/About.vue'
 import Catalogs from '@/views/Catalogs.vue'
+import Admin from '@/views/Admin.vue'
 
 const router = createRouter({
   history: createWebHistory(
@@ -60,6 +61,12 @@ const router = createRouter({
       path:'/about',
       name: 'about',
       component: about
+    },
+
+    {
+      path: '/admin',
+      name: 'admin-page',
+      component: Admin
     },
 
     {

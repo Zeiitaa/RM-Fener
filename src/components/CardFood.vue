@@ -32,18 +32,20 @@ defineProps({
       <h2 class="text-lg sm:text-lg font-bold uppercase">{{ title }}</h2>
       <p class="text-sm sm:text-sm text-gray-500">Ingredients: {{ ingredients }}</p>
 
-      <div class="flex items-center justify-between mt-7">
+      <div class="flex items-center justify-between mt-2">
         <div class="text-sm sm:text-sm xl:text-lg font-semibold">
-          PRICE :
-          <span class="text-red-500">{{ priceSpecial }}</span> 
+          Price :
+          <!-- <span class="text-red-500">{{ priceSpecial }}</span> <br>
+          From : -->
           <span class="text-gray-700">{{ priceNormal }}</span>
         </div>
+      </div>
 
-        <RouterLink to="/reservations"
-            class="bg-[#232528] text-white py-2 px-3 text-center rounded-md font-semibold hover:scale-110 w-[35vw] max-w-[120px] shadow-lg ">
+      <div class="flex justify-center">
+      <RouterLink to="/reservations"
+            class="bg-[#232528] text-white py-2 px-3 text-center rounded-md font-semibold w-[70vw] shadow-lg ">
             Book a Table
-        </RouterLink>
-
+      </RouterLink>
       </div>
     </div>
   </div>
