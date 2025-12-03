@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  rm-fener:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: "https://nonfaulty-harrowingly-candelaria.ngrok-free.dev"
+    container_name: rm-fener  
+    ports:
+      - "5000:5000"
+    environment:
+      - VITE_API_URL=https://nonfaulty-harrowingly-candelaria.ngrok-free.dev
+    restart: unless-stopped

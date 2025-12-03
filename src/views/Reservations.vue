@@ -4,6 +4,7 @@ import Reservation from '@/components/Reservation.vue';
 import Footer from '@/components/footer.vue';
 import { useAuthStore } from '@/stores/auth';
 const auth = useAuthStore()
+
 </script>
 
 <template>
