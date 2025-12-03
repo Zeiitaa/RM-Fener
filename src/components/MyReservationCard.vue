@@ -75,6 +75,10 @@ const canceled = async () => {
                     class="px-4 py-2 flex hover:scale-105 hover:cursor-pointer transition-all duration-200 items-center justify-center bg-green-500 text-white rounded-md ">
                     Cancel Reservation
                 </button>
+                <button v-if="props.reservation.status === '' || props.reservation.status === 'menunggu' " @click="canceled"
+                    class="px-4 py-2 flex hover:scale-105 hover:cursor-pointer transition-all duration-200 items-center justify-center bg-green-500 text-white rounded-md ">
+                    Cancel Reservation
+                </button>
             </div>
         </div>
     </div>
